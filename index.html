@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CN.回憶的自我介绍 - WinXP复古风</title>
+<style>
+  /* 鼠标指针：默认 */
+body {
+  margin: 0;
+  padding: 0;
+  background: url('1354126.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #cce0ff;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative;
+  overflow-x: hidden;
+}
+
+  /* 颗粒噪点叠加 */
+  body::before {
+    content: "";
+    pointer-events: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.04)"/></svg>') repeat;
+    z-index: 10;
+    opacity: 0.15;
+  }
+
+  /* WinXP窗口容器 */
+  .container {
+    max-width: 880px;
+    margin: 50px auto;
+    background: #102549;
+    border: 2px solid #4169e1;
+    box-shadow:
+      inset 2px 2px 0 #5a72c9,
+      inset -2px -2px 0 #0b1430,
+      6px 6px 15px rgba(0, 0, 0, 0.6);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    z-index: 20;
+  }
+
+  /* 标题栏：WinXP经典蓝色复古风 */
+  .titlebar {
+    background: linear-gradient(to bottom, #25408f, #162e6f);
+    color: #bcd9ff;
+    font-weight: bold;
+    font-size: 1.3em;
+    padding: 6px 12px;
+    user-select: none;
+    box-shadow: inset 0 -2px 3px #0b1340;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* 标题栏按钮 */
+  .titlebar-buttons {
+    display: flex;
+    gap: 6px;
+  }
+  .titlebar-button {
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(to bottom, #a0b8f8, #4d62b4);
+    border: 1px solid #2e3f7a;
+    box-shadow: inset 1px 1px 0 #e3edff,
+                inset -1px -1px 0 #1b2a5b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: #d9e8ff;
+    user-select: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .titlebar-button:hover {
+    background: linear-gradient(to bottom, #4d62b4, #a0b8f8);
+    color: #000;
+  }
+
+  /* 内容区域 */
+  .content {
+    padding: 20px 30px;
+    background: #1a2a5a;
+    color: #cce0ff;
+  }
+
+  h1 {
+    margin: 0 0 25px 0;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 0 #081332;
+  }
+
+  /* 折叠标题 */
+  .fold-title {
+    background: #3452a1;
+    border: 1px solid #1f377e;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .fold-title:hover {
+    background: #4c69c9;
+  }
+  .fold-title > span {
+    font-size: 1.2em;
+  }
+
+  /* 折叠内容 */
+  .fold-content {
+    background: #2c3e86;
+    border: 1px solid #1b2d6f;
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    display: none;
+    color: #d0dffd;
+    user-select: text;
+  }
+
+  /* 列表样式 */
+  ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: none;
+  }
+  li::before {
+    content: "■ ";
+    color: #89a7ff;
+  }
+  li {
+    margin: 6px 0;
+    font-size: 1em;
+  }
+
+  /* 水波点击特效 */
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(173, 216, 230, 0.4);
+    transform: scale(0);
+    animation: ripple-effect 0.6s linear;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  @keyframes ripple-effect {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+
+  /* 点击音效隐藏按钮 */
+  #audioControl {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25408f;
+    border: 1px solid #162e6f;
+    border-radius: 4px;
+    color: #cce0ff;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 6px 12px;
+    user-select: none;
+    z-index: 10000;
+  }
+  #audioControl:hover {
+    background: #4169e1;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="titlebar">
+    CN.回憶的自我介绍
+    <div class="titlebar-buttons">
+      <div class="titlebar-button" title="最小化">_</div>
+      <div class="titlebar-button" title="关闭">×</div>
+    </div>
+  </div>
+  <div class="content">
+    <!-- 折叠块 -->
+    <div class="fold-section">
+      <div class="fold-title" data-target="info"><span>🌐</span> 基本信息</div>
+      <div id="info" class="fold-content">
+        <div>CN.回憶</div>
+        <div>IP: 美國紐約布魯克林</div>
+        <div>生日: 11/11/2009</div>
+        <div>MBTI: ENTJ</div>
+        <div>昵称: 回忆，mhy</div>
+      </div>
+    </div>
+
+    <div class="fold-section">
+      <div class="fold-title" data-target="sanci"><span>🎭</span> 三次担</div>
+      <div id="sanci" class="fold-content">
+        <ul>
+          <li>SOHEE</li>
+          <li>寧藝卓</li>
+          <li>蘇建</li>
+          <li>樸元彬</li>
+          <li>TOMAYA</li>
+          <li>李柱延</li>
+          <li>明宰炫</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fold-section">
+      <div class="fold-title" data-target="erci"><span>📚</span> 二次</div>
+      <div id="erci" class="fold-content">
+        <ul>
+          <li>扭曲仙境</li>
+          <li>崩鐵</li>
+          <li>BangDream</li>
+          <li>pjsk</li>
+          <li>明日方舟</li>
+          <li>重返未來1999</li>
+          <li>persona全系列</li>
+          <li>真女神轉生全系列</li>
+          <li>偶像活動</li>
+          <li>美妙天堂</li>
+          <li>光美全系列</li>
+          <li>第五人格</li>
+          <li>美妙旋律</li>
+          <li>孤獨搖滾</li>
+          <li>GBC</li>
+          <li>腦葉公司</li>
+          <li>邊獄巴士</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fold-section">
+      <div class="fold-title" data-target="sanci3"><span>🎤</span> 三次</div>
+      <div id="sanci3" class="fold-content">
+        <ul>
+          <li>Riize</li>
+          <li>Nexz</li>
+          <li>Aespa</li>
+          <li>Tbz</li>
+          <li>Bnd</li>
+          <li>Got7</li>
+          <li>Tws</li>
+          <li>Zb1</li>
+          <li>h2h</li>
+          <li>假面騎士全系列</li>
+          <li>奥特曼全系列</li>
+          <li>曼徹斯特誠足球俱樂部</li>
+          <li>拜仁慕尼黑足球俱樂部</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fold-section">
+      <div class="fold-title" data-target="tuijian"><span>💖</span> 我推</div>
+      <div id="tuijian" class="fold-content">
+        <ul>
+          <li>卡芙卡</li>
+          <li>Idia Shroud</li>
+          <li>藿藿</li>
+          <li>那刻夏</li>
+          <li>阿米婭</li>
+		  <li>守泽千秋</li>
+          <li>Ace Trappola</li>
+          <li>霧矢葵</li>
+          <li>高松燈</li>
+          <li>望月穗波</li>
+          <li>花里實乃理</li>
+          <li>桐谷遙</li>
+          <li>伊索卡爾</li>
+          <li>维克多葛兰兹</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fold-section">
+      <div class="fold-title" data-target="lei"><span>⚠️</span> 我雷</div>
+      <div id="lei" class="fold-content">
+        <div>魔怔擺子解</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 音乐播放器 -->
+<audio id="audio" loop preload="auto" autoplay>
+  <source src="morning-cafe-chill-348999.mp3" type="audio/mpeg">
+  你的浏览器不支持音频播放。
+</audio>
+
+<!-- 音乐控制按钮 -->
+<button id="audioControl">暂停音乐</button>
+
+<script>
+  // 折叠功能
+  document.querySelectorAll('.fold-title').forEach(title => {
+    title.addEventListener('click', () => {
+      const targetId = title.getAttribute('data-target');
+      const content = document.getElementById(targetId);
+      if (!content) return;
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+      } else {
+        content.style.display = 'block';
+      }
+    });
+  });
+
+  // 点击水波特效
+  document.body.addEventListener('click', function(e) {
+    const ripple = document.createElement('span');
+    ripple.classList.add('ripple');
+    ripple.style.left = e.pageX + 'px';
+    ripple.style.top = e.pageY + 'px';
+    ripple.style.width = ripple.style.height = '100px';
+    ripple.style.marginLeft = '-50px';
+    ripple.style.marginTop = '-50px';
+    document.body.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  });
+
+  // 点击音效
+  const clickSound = new Audio('click-sound.mp3'); // 你需要准备点击音效文件
+  document.body.addEventListener('click', e => {
+    // 避免点击控制按钮也触发音效
+    if(e.target.id !== 'audioControl') {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    }
+  });
+
+  // 音乐播放控制
+  const audio = document.getElementById('audio');
+  const audioControl = document.getElementById('audioControl');
+
+  // 页面加载时自动播放音乐并设置按钮文本
+  window.addEventListener('load', () => {
+    audio.play().catch(() => {
+      // 某些浏览器可能需要用户交互才能播放
+      audioControl.textContent = '播放音乐';
+    });
+    audioControl.textContent = '暂停音乐';
+  });
+
+  audioControl.addEventListener('click', () => {
+    if(audio.paused) {
+      audio.play();
+      audioControl.textContent = '暂停音乐';
+    } else {
+      audio.pause();
+      audioControl.textContent = '播放音乐';
+    }
+  });
+</script>
+
+</body>
+</html>
